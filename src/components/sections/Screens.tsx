@@ -26,24 +26,14 @@ export function Screens() {
       title="The real Stash panel — light and dark"
       description="Fluent surfaces, shelf pills, and file cards that match the installed app."
     >
-      <div className="relative mx-auto grid max-w-5xl items-start gap-6 lg:grid-cols-2">
+      <div className="relative mx-auto grid max-w-5xl items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
         <div
           aria-hidden
           className="absolute inset-x-10 top-1/3 -z-10 h-40 rounded-full bg-[var(--accent)]/10 blur-3xl"
         />
 
-        <MockPanel
-          theme="dark"
-          reduceMotion={!!reduceMotion}
-          delay={0}
-          className="lg:translate-y-4"
-        />
-        <MockPanel
-          theme="light"
-          reduceMotion={!!reduceMotion}
-          delay={0.1}
-          className="lg:-translate-y-2"
-        />
+        <MockPanel theme="dark" reduceMotion={!!reduceMotion} delay={0} />
+        <MockPanel theme="light" reduceMotion={!!reduceMotion} delay={0.1} />
       </div>
     </Section>
   )
@@ -53,27 +43,24 @@ function MockPanel({
   theme,
   reduceMotion,
   delay,
-  className,
 }: {
   theme: 'dark' | 'light'
   reduceMotion: boolean
   delay: number
-  className?: string
 }) {
   const dark = theme === 'dark'
 
   return (
     <motion.div
-      className={cn('transform-gpu', className)}
-      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      className="h-full"
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={reduceMotion ? undefined : { y: -6 }}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       <div
         className={cn(
-          'overflow-hidden rounded-[22px] shadow-[var(--shadow-lg)] ring-1',
+          'flex h-full flex-col overflow-hidden rounded-[22px] shadow-[var(--shadow-lg)] ring-1',
           dark
             ? 'bg-[#111827] text-white ring-white/10'
             : 'bg-[#f3f4f6] text-[#111827] ring-black/8',
@@ -173,7 +160,7 @@ function MockPanel({
           ))}
         </div>
 
-        <div className="px-5 pt-2 pb-5">
+        <div className="mt-auto px-5 pt-2 pb-5">
           <div
             className={cn(
               'flex items-center justify-center gap-2.5 rounded-[14px] border border-dashed px-4 py-3.5 text-[13px] font-medium',
