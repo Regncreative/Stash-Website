@@ -1,7 +1,61 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import { Search, Settings, Wifi, Volume2, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
+
+/** Scales a fixed-width desktop scene to fit the parent — keeps layout identical on mobile. */
+export function ScaleToFit({
+  width,
+  height,
+  children,
+  className,
+}: {
+  width: number
+  height: number
+  children: React.ReactNode
+  className?: string
+}) {
+  const hostRef = useRef<HTMLDivElement>(null)
+  const [scale, setScale] = useState(1)
+
+  useEffect(() => {
+    const host = hostRef.current
+    if (!host) return
+
+    const update = (w: number) => {
+      if (w <= 0) return
+      setScale(Math.min(1, w / width))
+    }
+
+    update(host.clientWidth)
+    const ro = new ResizeObserver((entries) => {
+      const entry = entries[0]
+      if (entry) update(entry.contentRect.width)
+    })
+    ro.observe(host)
+    return () => ro.disconnect()
+  }, [width])
+
+  return (
+    <div
+      ref={hostRef}
+      className={cn('relative w-full overflow-hidden', className)}
+      style={{ height: height * scale }}
+    >
+      <div
+        className="absolute top-0 left-0 origin-top-left"
+        style={{
+          width,
+          height,
+          transform: `scale(${scale})`,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  )
+}
 
 export function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -30,7 +84,7 @@ export function DemoStage({
     <div
       className={cn(
         'relative overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,#1a2332_0%,#111827_55%,#0b1220_100%)]',
-        variant === 'wide' ? 'h-[620px] sm:h-[680px]' : 'h-[560px]',
+        variant === 'wide' ? 'h-[680px] w-full' : 'h-[560px]',
         className,
       )}
     >
