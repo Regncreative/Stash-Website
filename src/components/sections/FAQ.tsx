@@ -4,42 +4,22 @@ import { useId, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { Section } from '@/components/ui/Section'
+import { useLang } from '@/lib/i18n'
 import { cn } from '@/lib/cn'
-
-const faqs = [
-  {
-    q: 'Does Stash move my files?',
-    a: 'No. Stash stores references (paths) only. Your files stay exactly where they are on disk.',
-  },
-  {
-    q: 'Does it upload files?',
-    a: 'No. There is no cloud sync and no account. Metadata stays local in SQLite on your machine.',
-  },
-  {
-    q: 'Does it require an account?',
-    a: 'No account, no sign-in. Install, launch from the tray, and start dropping files.',
-  },
-  {
-    q: 'Is it open source?',
-    a: 'Yes. Stash is MIT-licensed and developed in the open on GitHub.',
-  },
-  {
-    q: 'Does it support Windows 10?',
-    a: 'Yes. Stash targets Windows 11 aesthetics and is compatible with Windows 10 (x64).',
-  },
-]
 
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0)
   const reduceMotion = useReducedMotion()
   const baseId = useId()
+  const { t } = useLang()
+  const faqs = t.faq.items
 
   return (
     <Section
       id="faq"
-      eyebrow="FAQ"
-      title="Straight answers"
-      description="The short version: local references, no uploads, open source."
+      eyebrow={t.faq.eyebrow}
+      title={t.faq.title}
+      description={t.faq.description}
     >
       <div className="mx-auto max-w-2xl divide-y divide-[var(--border)] rounded-3xl bg-[var(--surface)] ring-1 ring-[var(--border)]">
         {faqs.map((item, index) => {
@@ -48,7 +28,7 @@ export function FAQ() {
           const buttonId = `${baseId}-button-${index}`
 
           return (
-            <div key={item.q} className="px-5 sm:px-6">
+            <div key={index} className="px-5 sm:px-6">
               <h3>
                 <button
                   id={buttonId}

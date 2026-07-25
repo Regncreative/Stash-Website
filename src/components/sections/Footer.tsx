@@ -1,14 +1,19 @@
+'use client'
+
 import Image from 'next/image'
 import { Container } from '@/components/ui/Container'
 import { SITE } from '@/lib/constants'
-
-const links = [
-  { href: SITE.github, label: 'GitHub' },
-  { href: SITE.releases, label: 'Releases' },
-  { href: SITE.license, label: 'License' },
-]
+import { useLang } from '@/lib/i18n'
 
 export function Footer() {
+  const { t } = useLang()
+
+  const links = [
+    { href: SITE.github, label: t.footer.github },
+    { href: SITE.releases, label: t.footer.releases },
+    { href: SITE.license, label: t.footer.license },
+  ]
+
   return (
     <footer className="border-t border-[var(--border)] py-10">
       <Container className="flex flex-col items-center justify-between gap-6 sm:flex-row">

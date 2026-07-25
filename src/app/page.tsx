@@ -10,12 +10,13 @@ import { FAQ } from '@/components/sections/FAQ'
 import { Footer } from '@/components/sections/Footer'
 import { JsonLd } from '@/components/JsonLd'
 import { fetchLatestRelease } from '@/lib/github'
+import { LanguageProvider } from '@/lib/i18n'
 
 export default async function Home() {
   const release = await fetchLatestRelease()
 
   return (
-    <>
+    <LanguageProvider>
       <JsonLd version={release.version} />
       <Navbar downloadUrl={release.downloadUrl ?? release.url} />
       <main className="flex-1">
@@ -36,6 +37,6 @@ export default async function Home() {
       </main>
       <Footer />
       <FloatingDemo />
-    </>
+    </LanguageProvider>
   )
 }

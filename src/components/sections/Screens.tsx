@@ -14,17 +14,19 @@ import {
   X,
 } from 'lucide-react'
 import { Section } from '@/components/ui/Section'
+import { useLang } from '@/lib/i18n'
 import { cn } from '@/lib/cn'
 
 export function Screens() {
   const reduceMotion = useReducedMotion()
+  const { t } = useLang()
 
   return (
     <Section
       id="screens"
-      eyebrow="Interface"
-      title="The real Stash panel — light and dark"
-      description="Fluent surfaces, shelf pills, and file cards that match the installed app."
+      eyebrow={t.screens.eyebrow}
+      title={t.screens.title}
+      description={t.screens.description}
     >
       <div className="relative mx-auto grid max-w-5xl items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
         <div

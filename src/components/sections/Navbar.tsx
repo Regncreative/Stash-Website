@@ -7,16 +7,10 @@ import { Download } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { GitHubIcon } from '@/components/icons/GitHubIcon'
+import { FlagEn, FlagTr } from '@/components/demo/flags'
 import { SITE } from '@/lib/constants'
+import { useLang, type Lang } from '@/lib/i18n'
 import { cn } from '@/lib/cn'
-
-const links = [
-  { href: '#demo', label: 'Demo' },
-  { href: '#features', label: 'Features' },
-  { href: '#why', label: 'Why Stash' },
-  { href: '#download', label: 'Download' },
-  { href: '#faq', label: 'FAQ' },
-]
 
 type NavbarProps = {
   downloadUrl: string
@@ -24,6 +18,15 @@ type NavbarProps = {
 
 export function Navbar({ downloadUrl }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
+  const { lang, setLang, t } = useLang()
+
+  const links = [
+    { href: '#demo', label: t.nav.demo },
+    { href: '#features', label: t.nav.features },
+    { href: '#why', label: t.nav.why },
+    { href: '#download', label: t.nav.download },
+    { href: '#faq', label: t.nav.faq },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -62,6 +65,35 @@ export function Navbar({ downloadUrl }: NavbarProps) {
         </nav>
 
         <div className="flex items-center gap-2">
+          <div
+            className="flex items-center gap-0.5 rounded-full bg-black/[0.04] p-1 ring-1 ring-black/[0.06]"
+            role="group"
+            aria-label="Language"
+          >
+            {(
+              [
+                { code: 'en', label: 'English', Flag: FlagEn },
+                { code: 'tr', label: 'Türkçe', Flag: FlagTr },
+              ] as Array<{ code: Lang; label: string; Flag: typeof FlagEn }>
+            ).map(({ code, label, Flag }) => (
+              <button
+                key={code}
+                type="button"
+                aria-label={label}
+                aria-pressed={lang === code}
+                className={cn(
+                  'flex items-center gap-1.5 rounded-full px-2 py-1.5 text-[11px] font-semibold uppercase transition-all',
+                  lang === code
+                    ? 'bg-white text-[var(--foreground)] shadow-sm ring-1 ring-black/[0.06]'
+                    : 'text-[var(--muted)] opacity-60 hover:opacity-100',
+                )}
+                onClick={() => setLang(code)}
+              >
+                <Flag className="rounded-[3px]" />
+                <span className="hidden lg:inline">{code}</span>
+              </button>
+            ))}
+          </div>
           <Button
             href={SITE.github}
             external
@@ -74,7 +106,7 @@ export function Navbar({ downloadUrl }: NavbarProps) {
           </Button>
           <Button href={downloadUrl} external size="md" aria-label="Download latest Stash release">
             <Download className="size-4" aria-hidden />
-            Download
+            {t.nav.downloadBtn}
           </Button>
         </div>
       </Container>

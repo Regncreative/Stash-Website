@@ -16,6 +16,7 @@ import {
   X,
 } from 'lucide-react'
 import Image from 'next/image'
+import { useLang } from '@/lib/i18n'
 import { cn } from '@/lib/cn'
 
 type DemoFile = {
@@ -38,6 +39,7 @@ const ACCENTS = ['#2563EB', '#0078D4', '#8764B8', '#038387', '#00B294', '#CA5010
 
 export function FloatingDemo() {
   const reduceMotion = useReducedMotion()
+  const { t } = useLang()
   const [open, setOpen] = useState(false)
   const [hint, setHint] = useState(true)
   const [view, setView] = useState<'shelf' | 'settings'>('shelf')
@@ -71,7 +73,7 @@ export function FloatingDemo() {
   const removeFile = (id: string) => {
     const target = files.find((f) => f.id === id)
     setFiles((prev) => prev.filter((f) => f.id !== id))
-    if (target) showToast(`Removed ${target.name}`)
+    if (target) showToast(`${t.floating.removed} ${target.name}`)
   }
 
   const addDemoFile = (name?: string) => {
@@ -84,7 +86,7 @@ export function FloatingDemo() {
       pinned: false,
     }
     setFiles((prev) => [next, ...prev])
-    showToast(`Added ${next.name}`)
+    showToast(`${t.floating.added} ${next.name}`)
   }
 
   const surface = dark ? 'bg-[#1a2233]' : 'bg-black/[0.05]'
@@ -121,8 +123,8 @@ export function FloatingDemo() {
                   <p className="text-[17px] font-semibold leading-none">Stash</p>
                   <p className={cn('mt-1.5 text-[11px]', mutedText)}>
                     {view === 'settings'
-                      ? 'Settings'
-                      : `${files.length} files · try search, pin, delete`}
+                      ? t.floating.settingsSubtitle
+                      : `${files.length} ${t.floating.subtitle}`}
                   </p>
                 </div>
               </div>
@@ -167,7 +169,7 @@ export function FloatingDemo() {
                     <input
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
-                      placeholder="Search files…"
+                      placeholder={t.floating.searchPlaceholder}
                       className={cn(
                         'h-9 w-full rounded-[10px] border pr-8 pl-9 text-[13px] outline-none',
                         dark
@@ -227,7 +229,7 @@ export function FloatingDemo() {
                         mutedText,
                       )}
                     >
-                      No matching files
+                      {t.floating.noMatch}
                     </li>
                   ) : (
                     filtered.map((file) => (
@@ -301,7 +303,7 @@ export function FloatingDemo() {
                     }}
                   >
                     <Upload size={14} />
-                    {dropOver ? 'Release to stash' : 'Drop a file or click to add'}
+                    {dropOver ? t.floating.dropActive : t.floating.dropIdle}
                   </button>
 
                   <AnimatePresence>
@@ -317,7 +319,7 @@ export function FloatingDemo() {
                       </motion.p>
                     ) : (
                       <p className={cn('mt-2 text-center text-[10px]', mutedText)}>
-                        Interactive demo — files stay in this browser tab only
+                        {t.floating.note}
                       </p>
                     )}
                   </AnimatePresence>
@@ -332,34 +334,34 @@ export function FloatingDemo() {
                   onClick={() => setView('shelf')}
                 >
                   <ArrowLeft size={14} />
-                  Back to shelf
+                  {t.floating.backToShelf}
                 </button>
 
                 <div className={cn('rounded-[14px] px-3 py-3 ring-1', surface, dark ? 'ring-white/8' : 'ring-black/8')}>
                   <p className={cn('mb-2.5 text-[10px] font-semibold tracking-[0.06em] uppercase', mutedText)}>
-                    Appearance
+                    {t.floating.appearance}
                   </p>
 
-                  <p className="mb-1.5 text-[11px] font-medium">Theme</p>
+                  <p className="mb-1.5 text-[11px] font-medium">{t.floating.theme}</p>
                   <div className="mb-3 grid grid-cols-2 gap-1.5">
                     {(['light', 'dark'] as const).map((mode) => (
                       <button
                         key={mode}
                         type="button"
                         className={cn(
-                          'rounded-[9px] py-2 text-[11px] font-medium capitalize transition-colors',
+                          'rounded-[9px] py-2 text-[11px] font-medium transition-colors',
                           theme === mode ? 'text-white' : cn(surface, mutedText),
                         )}
                         style={theme === mode ? { background: accent } : undefined}
                         aria-pressed={theme === mode}
                         onClick={() => setTheme(mode)}
                       >
-                        {mode}
+                        {mode === 'light' ? t.floating.light : t.floating.dark}
                       </button>
                     ))}
                   </div>
 
-                  <p className="mb-1.5 text-[11px] font-medium">Accent color</p>
+                  <p className="mb-1.5 text-[11px] font-medium">{t.floating.accent}</p>
                   <div className="flex flex-wrap gap-2">
                     {ACCENTS.map((color) => (
                       <button
@@ -381,14 +383,14 @@ export function FloatingDemo() {
 
                 <div className={cn('rounded-[14px] px-3 py-3 ring-1', surface, dark ? 'ring-white/8' : 'ring-black/8')}>
                   <p className={cn('mb-2.5 text-[10px] font-semibold tracking-[0.06em] uppercase', mutedText)}>
-                    Behavior
+                    {t.floating.behavior}
                   </p>
 
                   <div className="flex items-center justify-between gap-2">
                     <div>
-                      <p className="text-[12px]">Notifications</p>
+                      <p className="text-[12px]">{t.floating.notifications}</p>
                       <p className={cn('mt-0.5 text-[10px]', mutedText)}>
-                        Alerts for added files
+                        {t.floating.notificationsDesc}
                       </p>
                     </div>
                     <button
@@ -412,12 +414,12 @@ export function FloatingDemo() {
                   </div>
 
                   <div className={cn('mt-3 rounded-[10px] px-3 py-2.5 text-[11px]', dark ? 'bg-[#111827]' : 'bg-white', mutedText)}>
-                    Panel hotkey · <span className={dark ? 'text-white' : 'text-[#111827]'}>Ctrl + Shift + Space</span>
+                    {t.floating.hotkeyLabel} · <span className={dark ? 'text-white' : 'text-[#111827]'}>Ctrl + Shift + Space</span>
                   </div>
                 </div>
 
                 <p className={cn('pt-1 text-center text-[10px]', mutedText)}>
-                  Settings apply instantly to this demo
+                  {t.floating.settingsNote}
                 </p>
               </div>
             )}
@@ -434,7 +436,7 @@ export function FloatingDemo() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
           >
-            Try Stash — search, pin, delete
+            {t.floating.hint}
           </motion.div>
         ) : null}
       </AnimatePresence>

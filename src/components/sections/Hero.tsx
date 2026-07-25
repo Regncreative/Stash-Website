@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { GitHubIcon } from '@/components/icons/GitHubIcon'
 import { SITE } from '@/lib/constants'
+import { useLang } from '@/lib/i18n'
 
 type HeroProps = {
   version: string
@@ -15,6 +16,7 @@ type HeroProps = {
 
 export function Hero({ version, downloadUrl }: HeroProps) {
   const reduceMotion = useReducedMotion()
+  const { t } = useLang()
 
   return (
     <section className="relative overflow-hidden pt-10 pb-16 sm:pt-16 sm:pb-24">
@@ -50,8 +52,7 @@ export function Hero({ version, downloadUrl }: HeroProps) {
             Stash
           </h1>
           <p className="mt-4 max-w-xl text-balance text-lg text-[var(--muted)] sm:text-xl">
-            {SITE.tagline}. Park files in the tray, drag them back when you need them — references
-            only, no clutter.
+            {t.hero.tagline}
           </p>
 
           <div className="mt-5 flex max-w-2xl flex-wrap items-center justify-center gap-2">
@@ -137,16 +138,16 @@ export function Hero({ version, downloadUrl }: HeroProps) {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Button href={downloadUrl} external size="lg">
               <Download className="size-4" aria-hidden />
-              Download for Windows
+              {t.hero.downloadBtn}
             </Button>
             <Button href={SITE.github} external variant="secondary" size="lg">
               <GitHubIcon />
-              View on GitHub
+              {t.hero.githubBtn}
             </Button>
           </div>
 
           <p className="mt-5 text-sm text-[var(--muted)]">
-            Open anytime with{' '}
+            {t.hero.shortcutPrefix}{' '}
             <kbd className="rounded-md bg-black/[0.05] px-1.5 py-0.5 font-medium text-[var(--foreground)] ring-1 ring-black/[0.06]">
               {SITE.shortcut}
             </kbd>

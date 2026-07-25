@@ -3,43 +3,31 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Check, X } from 'lucide-react'
 import { Section } from '@/components/ui/Section'
+import { useLang } from '@/lib/i18n'
 import { cn } from '@/lib/cn'
-
-const withoutItems = [
-  'Desktop clutter',
-  'Downloads folder chaos',
-  'Constant Explorer switching',
-  'Lost temporary files',
-]
-
-const withItems = [
-  'Clean desktop',
-  'Organized shelves',
-  'Instant tray access',
-  'A clearer workflow',
-]
 
 export function WhyStash() {
   const reduceMotion = useReducedMotion()
+  const { t } = useLang()
 
   return (
     <Section
       id="why"
-      eyebrow="Why Stash"
-      title="Stop parking files on the desktop"
-      description="Windows never gave you a proper temporary shelf. Stash does — without moving or uploading a byte."
+      eyebrow={t.why.eyebrow}
+      title={t.why.title}
+      description={t.why.description}
     >
       <div className="grid gap-5 md:grid-cols-2">
         <CompareColumn
           tone="bad"
-          title="Without Stash"
-          items={withoutItems}
+          title={t.why.withoutTitle}
+          items={t.why.withoutItems}
           reduceMotion={!!reduceMotion}
         />
         <CompareColumn
           tone="good"
-          title="With Stash"
-          items={withItems}
+          title={t.why.withTitle}
+          items={t.why.withItems}
           reduceMotion={!!reduceMotion}
         />
       </div>
