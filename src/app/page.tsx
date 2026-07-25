@@ -16,7 +16,7 @@ export default async function Home() {
   return (
     <>
       <JsonLd version={release.version} />
-      <Navbar />
+      <Navbar downloadUrl={release.downloadUrl ?? release.url} />
       <main className="flex-1">
         <Hero
           version={release.version}

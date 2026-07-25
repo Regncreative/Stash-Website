@@ -1,9 +1,19 @@
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
-import { FileText, Image as ImageIcon, Settings2 } from 'lucide-react'
+import {
+  FileText,
+  Heart,
+  Image as ImageIcon,
+  Pin,
+  Plus,
+  Search,
+  Settings,
+  Trash2,
+  Upload,
+  X,
+} from 'lucide-react'
 import { Section } from '@/components/ui/Section'
-import { WindowFrame } from '@/components/ui/WindowFrame'
 import { cn } from '@/lib/cn'
 
 export function Screens() {
@@ -13,129 +23,211 @@ export function Screens() {
     <Section
       id="screens"
       eyebrow="Interface"
-      title="Realistic Windows mockups — not stock screenshots"
-      description="Glass surfaces, soft depth, and Fluent spacing that mirror the installed experience."
+      title="The real Stash panel — light and dark"
+      description="Fluent surfaces, shelf pills, and file cards that match the installed app."
     >
-      <div className="relative mx-auto max-w-5xl perspective-[1400px]">
+      <div className="relative mx-auto grid max-w-5xl items-start gap-6 lg:grid-cols-2">
         <div
           aria-hidden
           className="absolute inset-x-10 top-1/3 -z-10 h-40 rounded-full bg-[var(--accent)]/10 blur-3xl"
         />
 
-        <div className="grid items-end gap-6 lg:grid-cols-[1fr_1.15fr_0.9fr]">
-          <MockPanel
-            className="lg:translate-y-8"
-            style={{ transform: 'perspective(1200px) rotateY(-6deg) translateY(2rem)' }}
-            title="Shelves"
-            dark
-            reduceMotion={!!reduceMotion}
-            delay={0}
-          >
-            <div className="space-y-2 p-4">
-              {['Work', 'Personal', 'Temporary'].map((shelf, i) => (
-                <div
-                  key={shelf}
-                  className={cn(
-                    'flex items-center gap-3 rounded-xl px-3 py-2.5',
-                    i === 0 ? 'bg-white/10' : 'bg-white/[0.04]',
-                  )}
-                >
-                  <span
-                    className="size-2.5 rounded-full"
-                    style={{ background: ['#2563EB', '#8764B8', '#00B294'][i] }}
-                  />
-                  <span className="text-sm">{shelf}</span>
-                </div>
-              ))}
-            </div>
-          </MockPanel>
-
-          <MockPanel
-            className="lg:z-10 lg:scale-[1.03]"
-            title="Stash"
-            reduceMotion={!!reduceMotion}
-            delay={0.08}
-          >
-            <div className="space-y-2 p-4">
-              {[
-                { name: 'Proposal.pdf', Icon: FileText },
-                { name: 'Cover.png', Icon: ImageIcon },
-                { name: 'Agenda.docx', Icon: FileText },
-              ].map((file) => (
-                <div
-                  key={file.name}
-                  className="flex items-center gap-3 rounded-xl bg-black/[0.03] px-3 py-2.5 ring-1 ring-black/[0.04]"
-                >
-                  <span className="inline-flex size-8 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
-                    <file.Icon className="size-4" />
-                  </span>
-                  <span className="text-sm font-medium">{file.name}</span>
-                </div>
-              ))}
-            </div>
-          </MockPanel>
-
-          <MockPanel
-            className="lg:translate-y-10"
-            style={{ transform: 'perspective(1200px) rotateY(6deg) translateY(2.5rem)' }}
-            title="Settings"
-            reduceMotion={!!reduceMotion}
-            delay={0.16}
-          >
-            <div className="space-y-3 p-4 text-sm">
-              <div className="flex items-center justify-between rounded-xl bg-black/[0.03] px-3 py-2.5">
-                <span className="inline-flex items-center gap-2">
-                  <Settings2 className="size-4 text-[var(--accent)]" />
-                  Start with Windows
-                </span>
-                <span className="h-5 w-9 rounded-full bg-[var(--accent)] p-0.5">
-                  <span className="block size-4 translate-x-4 rounded-full bg-white" />
-                </span>
-              </div>
-              <div className="rounded-xl bg-black/[0.03] px-3 py-2.5 text-[var(--muted)]">
-                Shortcut · Ctrl+Shift+Space
-              </div>
-              <div className="rounded-xl bg-black/[0.03] px-3 py-2.5 text-[var(--muted)]">
-                Language · English / Türkçe
-              </div>
-            </div>
-          </MockPanel>
-        </div>
+        <MockPanel
+          theme="dark"
+          reduceMotion={!!reduceMotion}
+          delay={0}
+          className="lg:translate-y-4"
+        />
+        <MockPanel
+          theme="light"
+          reduceMotion={!!reduceMotion}
+          delay={0.1}
+          className="lg:-translate-y-2"
+        />
       </div>
     </Section>
   )
 }
 
 function MockPanel({
-  children,
-  title,
-  className,
-  style,
-  dark,
+  theme,
   reduceMotion,
   delay,
+  className,
 }: {
-  children: React.ReactNode
-  title: string
-  className?: string
-  style?: React.CSSProperties
-  dark?: boolean
+  theme: 'dark' | 'light'
   reduceMotion: boolean
   delay: number
+  className?: string
 }) {
+  const dark = theme === 'dark'
+
   return (
     <motion.div
-      className={cn('transform-gpu max-lg:[transform:none!important]', className)}
-      style={style}
+      className={cn('transform-gpu', className)}
       initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
       whileHover={reduceMotion ? undefined : { y: -6 }}
     >
-      <WindowFrame title={title} dark={dark} className="backdrop-blur-xl">
-        {children}
-      </WindowFrame>
+      <div
+        className={cn(
+          'overflow-hidden rounded-[22px] shadow-[var(--shadow-lg)] ring-1',
+          dark
+            ? 'bg-[#111827] text-white ring-white/10'
+            : 'bg-[#f3f4f6] text-[#111827] ring-black/8',
+        )}
+      >
+        <div className="px-5 pt-5 pb-3">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div
+                className="flex size-9 items-center justify-center rounded-[11px]"
+                style={{ background: 'linear-gradient(145deg, #3b82f6 0%, #2563eb 100%)' }}
+              >
+                <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden>
+                  <rect x="2.5" y="3" width="11" height="2.2" rx="0.7" fill="white" />
+                  <rect x="2.5" y="6.9" width="11" height="2.2" rx="0.7" fill="white" opacity="0.8" />
+                  <rect x="2.5" y="10.8" width="8" height="2.2" rx="0.7" fill="white" opacity="0.55" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-[22px] font-semibold leading-none tracking-[-0.02em]">Stash</p>
+                <p
+                  className={cn(
+                    'mt-1.5 text-[13px] leading-none',
+                    dark ? 'text-[#9ca3af]' : 'text-[#6b7280]',
+                  )}
+                >
+                  1 Shelves · 6 Files · 384 MB
+                </p>
+              </div>
+            </div>
+            <div className={cn('flex gap-0.5', dark ? 'text-[#9ca3af]' : 'text-[#6b7280]')}>
+              <span className="p-2">
+                <Search size={18} strokeWidth={1.75} />
+              </span>
+              <span className="p-2">
+                <Settings size={18} strokeWidth={1.75} />
+              </span>
+              <span className="p-2">
+                <X size={18} strokeWidth={1.75} />
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 px-5 pb-3">
+          <div className="flex h-10 items-center gap-2 rounded-full bg-[#2563eb] px-4 text-[13px] font-medium text-white shadow-[0_6px_18px_rgba(37,99,235,0.35)]">
+            <Heart size={16} fill="currentColor" strokeWidth={1.75} />
+            Personal
+            <span className="text-white/85">6</span>
+          </div>
+          <div
+            className={cn(
+              'flex size-10 items-center justify-center rounded-full',
+              dark ? 'bg-[#1a2233] text-[#9ca3af]' : 'bg-[#e5e7eb] text-[#6b7280]',
+            )}
+          >
+            <Plus size={18} strokeWidth={1.75} />
+          </div>
+        </div>
+
+        <div className="space-y-2 px-5 pb-2">
+          {[
+            { name: 'Design.psd', size: '384 MB', time: '18:57', icon: 'psd' as const },
+            { name: 'images.png', size: '6.0 KB', time: '18:57', icon: 'png' as const },
+            { name: 'amazon.svg', size: '3.1 KB', time: '18:57', icon: 'edge' as const },
+          ].map((file) => (
+            <div
+              key={file.name}
+              className={cn(
+                'flex h-[72px] items-center gap-3.5 rounded-[14px] px-3.5',
+                dark ? 'bg-[#1a2233]' : 'bg-white',
+              )}
+            >
+              <Glyph kind={file.icon} dark={dark} />
+              <div className="min-w-0 flex-1">
+                <div className="truncate text-[15px] font-medium">{file.name}</div>
+                <div
+                  className={cn(
+                    'mt-1.5 text-[13px] leading-none',
+                    dark ? 'text-[#9ca3af]' : 'text-[#6b7280]',
+                  )}
+                >
+                  {file.size}
+                </div>
+              </div>
+              <div
+                className={cn(
+                  'flex items-center gap-1.5',
+                  dark ? 'text-[#9ca3af]' : 'text-[#6b7280]',
+                )}
+              >
+                <span className="mr-1.5 text-[13px] tabular-nums">{file.time}</span>
+                <Pin size={16} strokeWidth={1.75} className="opacity-40" />
+                <Trash2 size={16} strokeWidth={1.75} className="opacity-40" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="px-5 pt-2 pb-5">
+          <div
+            className={cn(
+              'flex items-center justify-center gap-2.5 rounded-[14px] border border-dashed px-4 py-3.5 text-[13px] font-medium',
+              dark
+                ? 'border-white/12 bg-white/[0.02] text-[#9ca3af]'
+                : 'border-black/14 bg-black/[0.02] text-[#6b7280]',
+            )}
+          >
+            <Upload size={18} strokeWidth={1.75} />
+            Drop files here
+          </div>
+        </div>
+      </div>
     </motion.div>
+  )
+}
+
+function Glyph({ kind, dark }: { kind: 'psd' | 'png' | 'edge'; dark: boolean }) {
+  if (kind === 'psd') {
+    return (
+      <div className="flex size-11 items-center justify-center rounded-[12px] bg-[#1e3a5f]">
+        <span className="rounded bg-[#31a8ff] px-1 py-0.5 text-[9px] font-bold text-white">Ps</span>
+      </div>
+    )
+  }
+  if (kind === 'edge') {
+    return (
+      <div
+        className={cn(
+          'flex size-11 items-center justify-center rounded-[12px]',
+          dark ? 'bg-white/5' : 'bg-black/5',
+        )}
+      >
+        <div
+          className="size-7 rounded-full"
+          style={{
+            background: 'conic-gradient(from 210deg, #0c64d0, #36c5f0, #1ea760, #f7b928, #0c64d0)',
+          }}
+        />
+      </div>
+    )
+  }
+  return (
+    <div
+      className={cn(
+        'flex size-11 items-center justify-center rounded-[12px] text-[#60a5fa]',
+        dark ? 'bg-white/5' : 'bg-black/5',
+      )}
+    >
+      {kind === 'png' ? (
+        <ImageIcon size={22} strokeWidth={1.5} />
+      ) : (
+        <FileText size={22} strokeWidth={1.5} />
+      )}
+    </div>
   )
 }

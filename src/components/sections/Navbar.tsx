@@ -18,7 +18,11 @@ const links = [
   { href: '#faq', label: 'FAQ' },
 ]
 
-export function Navbar() {
+type NavbarProps = {
+  downloadUrl: string
+}
+
+export function Navbar({ downloadUrl }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -68,7 +72,7 @@ export function Navbar() {
             <GitHubIcon />
             GitHub
           </Button>
-          <Button href="#download" size="md">
+          <Button href={downloadUrl} external size="md" aria-label="Download latest Stash release">
             <Download className="size-4" aria-hidden />
             Download
           </Button>

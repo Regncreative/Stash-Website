@@ -5,7 +5,6 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Download } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
-import { Badge } from '@/components/ui/Badge'
 import { GitHubIcon } from '@/components/icons/GitHubIcon'
 import { SITE } from '@/lib/constants'
 
@@ -55,11 +54,84 @@ export function Hero({ version, downloadUrl }: HeroProps) {
             only, no clutter.
           </p>
 
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-            <Badge tone="accent">v{version}</Badge>
-            <Badge>Windows 11</Badge>
-            <Badge>x64</Badge>
-            <Badge tone="success">MIT</Badge>
+          <div className="mt-5 flex max-w-2xl flex-wrap items-center justify-center gap-2">
+            <a
+              href={`${SITE.github}/actions/workflows/ci.yml`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-opacity hover:opacity-80"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${SITE.github}/actions/workflows/ci.yml/badge.svg`}
+                alt="CI"
+                height={20}
+                className="h-5"
+              />
+            </a>
+            <a
+              href={`${SITE.github}/actions/workflows/codeql.yml`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-opacity hover:opacity-80"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${SITE.github}/actions/workflows/codeql.yml/badge.svg`}
+                alt="CodeQL"
+                height={20}
+                className="h-5"
+              />
+            </a>
+            <a
+              href={SITE.latestRelease}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-opacity hover:opacity-80"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://img.shields.io/github/v/release/${SITE.repo}?label=latest%20release`}
+                alt={`Latest release v${version}`}
+                height={20}
+                className="h-5"
+              />
+            </a>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://img.shields.io/badge/platform-Windows-0078D4?logo=windows&logoColor=white"
+              alt="Windows"
+              height={20}
+              className="h-5"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://img.shields.io/badge/Electron-34-47848F?logo=electron&logoColor=white"
+              alt="Electron 34"
+              height={20}
+              className="h-5"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white"
+              alt="TypeScript 5"
+              height={20}
+              className="h-5"
+            />
+            <a
+              href={SITE.license}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-opacity hover:opacity-80"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://img.shields.io/badge/license-MIT-green"
+                alt="MIT license"
+                height={20}
+                className="h-5"
+              />
+            </a>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
