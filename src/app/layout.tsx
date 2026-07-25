@@ -51,6 +51,15 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: ['/brand/og.png'],
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico?v=3', sizes: 'any' },
+      { url: '/favicon.svg?v=3', type: 'image/svg+xml' },
+      { url: '/icon.png?v=3', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png?v=3', sizes: '180x180' }],
+    shortcut: '/favicon.ico?v=3',
+  },
   robots: {
     index: true,
     follow: true,
