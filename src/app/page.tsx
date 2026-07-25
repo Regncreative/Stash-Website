@@ -1,3 +1,4 @@
+import { FloatingDemo } from '@/components/FloatingDemo'
 import { Navbar } from '@/components/sections/Navbar'
 import { Hero } from '@/components/sections/Hero'
 import { ProductDemo } from '@/components/sections/ProductDemo'
@@ -34,6 +35,7 @@ export default async function Home() {
         <FAQ />
       </main>
       <Footer />
+      <FloatingDemo />
     </>
   )
 }
