@@ -13,12 +13,39 @@ const en = {
     faq: 'FAQ',
     downloadBtn: 'Download',
   },
+  install: {
+    open: 'Installation help',
+    close: 'Close',
+    title: 'Installing Stash on Windows',
+    intro:
+      'Stash is distributed as a Windows installer (`.exe`) from GitHub Releases. Windows may show a SmartScreen prompt on first run — that’s expected for apps outside the Microsoft Store.',
+    steps: [
+      'Download the latest **Stash Setup** `.exe` from the release page.',
+      'Open the downloaded `.exe` file.',
+      'If **Windows protected your PC** appears, click **More info**, then **Run anyway**.',
+      'Follow the installer, then launch Stash from the Start menu.',
+      'Stash lives in the system tray — look for the Stash icon near the clock, or press `Ctrl+Shift+Space`.',
+    ],
+    blockedTitle: 'Still blocked?',
+    blockedBody:
+      'Open **Windows Security** → **App & browser control** → **Reputation-based protection settings**, and allow the installer. You can also right-click the `.exe` → **Properties** → check **Unblock** → **OK**, then run it again.',
+    whyTitle: 'Why does this happen?',
+    whyBody:
+      'Windows SmartScreen warns about apps that are new or not widely signed through the Store. Stash is open source on GitHub — you can review the code and download the official build from Releases before you install.',
+    source: 'Source code',
+    release: 'Release page',
+  },
   hero: {
     tagline:
       'A modern file shelf for Windows. Park files in the tray, drag them back when you need them — references only, no clutter.',
     downloadBtn: 'Download for Windows',
     githubBtn: 'View on GitHub',
     shortcutPrefix: 'Open anytime with',
+  },
+  productHunt: {
+    live: 'Live now',
+    title: 'Stash is on Product Hunt',
+    subtitle: 'an upvote helps more people find it',
   },
   productDemo: {
     eyebrow: 'Product demo',
@@ -176,12 +203,39 @@ const tr: Dict = {
     faq: 'SSS',
     downloadBtn: 'İndir',
   },
+  install: {
+    open: 'Kurulum yardımı',
+    close: 'Kapat',
+    title: 'Stash’i Windows’a kurma',
+    intro:
+      'Stash, GitHub Releases üzerinden Windows kurulum dosyası (`.exe`) olarak dağıtılır. İlk çalıştırmada Windows SmartScreen uyarısı gösterebilir — Microsoft Store dışındaki uygulamalar için bu beklenen bir durumdur.',
+    steps: [
+      'Sürüm sayfasından en son **Stash Setup** `.exe` dosyasını indirin.',
+      'İndirdiğiniz `.exe` dosyasını açın.',
+      '**Windows PC’nizi korudu** uyarısı çıkarsa **Ek bilgi**ye, ardından **Yine de çalıştır**a tıklayın.',
+      'Kurulum sihirbazını tamamlayın ve Stash’i Başlat menüsünden açın.',
+      'Stash sistem tepsisinde yaşar — saat yanındaki Stash simgesine bakın veya `Ctrl+Shift+Space` kullanın.',
+    ],
+    blockedTitle: 'Hâlâ engelleniyor mu?',
+    blockedBody:
+      '**Windows Güvenliği** → **Uygulama ve tarayıcı denetimi** → **İtibar tabanlı koruma ayarları** yolunu açıp yükleyiciye izin verin. Ayrıca `.exe` dosyasına sağ tıklayıp **Özellikler** → **Engellemeyi kaldır** → **Tamam** deyip yeniden çalıştırabilirsiniz.',
+    whyTitle: 'Bu neden olur?',
+    whyBody:
+      'Windows SmartScreen, Store dışında yeni veya az bilinen uygulamalar için uyarı verir. Stash GitHub’da açık kaynaklıdır — kurmadan önce kodu inceleyebilir ve resmi derlemeyi Releases’ten indirebilirsiniz.',
+    source: 'Kaynak kod',
+    release: 'Sürüm sayfası',
+  },
   hero: {
     tagline:
       'Windows için modern bir dosya rafı. Dosyaları tepside bekletin, gerektiğinde geri sürükleyin — yalnızca referanslar, dağınıklık yok.',
     downloadBtn: 'Windows için indir',
     githubBtn: 'GitHub’da görüntüle',
     shortcutPrefix: 'İstediğiniz an açın:',
+  },
+  productHunt: {
+    live: 'Canlı',
+    title: 'Stash Product Hunt’ta',
+    subtitle: 'bir upvote daha fazla geliştiricinin bulmasına yardımcı olur',
   },
   productDemo: {
     eyebrow: 'Ürün demosu',

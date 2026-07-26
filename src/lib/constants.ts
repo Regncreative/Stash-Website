@@ -12,4 +12,6 @@ export const SITE = {
   repo: 'Regncreative/Stash',
   versionFallback: '1.0.1',
   shortcut: 'Ctrl+Shift+Space',
+  productHunt:
+    'https://www.producthunt.com/products/stash-20?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-stash-21',
 } as const
