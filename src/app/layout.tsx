@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Manrope } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { CursorGlow } from '@/components/sections/CursorGlow'
 import { SITE } from '@/lib/constants'
 import './globals.css'
@@ -78,6 +80,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="min-h-full flex flex-col">
         <CursorGlow />
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
