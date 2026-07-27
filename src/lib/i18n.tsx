@@ -43,9 +43,9 @@ const en = {
     shortcutPrefix: 'Open anytime with',
   },
   productHunt: {
-    live: 'Live now',
-    title: 'Stash is on Product Hunt',
-    subtitle: 'an upvote helps more people find it',
+    live: 'Coming soon',
+    title: 'Stash is launching on Product Hunt',
+    subtitle: 'follow along and be ready to upvote',
   },
   productDemo: {
     eyebrow: 'Product demo',
@@ -233,9 +233,9 @@ const tr: Dict = {
     shortcutPrefix: 'İstediğiniz an açın:',
   },
   productHunt: {
-    live: 'Canlı',
-    title: 'Stash Product Hunt’ta',
-    subtitle: 'bir upvote daha fazla geliştiricinin bulmasına yardımcı olur',
+    live: 'Yakında',
+    title: 'Stash yakında Product Hunt’ta',
+    subtitle: 'takipte kal, upvote için hazır ol',
   },
   productDemo: {
     eyebrow: 'Ürün demosu',
