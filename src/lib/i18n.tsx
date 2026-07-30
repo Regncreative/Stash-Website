@@ -406,9 +406,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const saved = window.localStorage.getItem(STORAGE_KEY)
     if (saved === 'tr' || saved === 'en') {
       setLang(saved)
-    } else if (navigator.language.toLowerCase().startsWith('tr')) {
-      setLang('tr')
     }
+    // Default remains English for first-time visitors
   }, [])
 
   useEffect(() => {
