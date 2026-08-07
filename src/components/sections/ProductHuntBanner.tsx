@@ -26,7 +26,7 @@ export function ProductHuntBanner() {
       rel="noopener noreferrer"
       className="group flex h-9 items-center justify-center gap-2.5 bg-[#171717] px-3 text-[12px] text-white/85 transition-colors hover:bg-[#1f1f1f] sm:gap-3 sm:text-[13px]"
     >
-      <span className="inline-flex shrink-0 items-center rounded-full bg-amber-500/90 px-2 py-0.5 text-[10px] font-bold tracking-[0.04em] text-white uppercase">
+      <span className="inline-flex shrink-0 items-center rounded-full bg-[#2563eb] px-2 py-0.5 text-[10px] font-bold tracking-[0.04em] text-white uppercase">
         {t.productHunt.live}
       </span>
       <span className="min-w-0 truncate text-center">
